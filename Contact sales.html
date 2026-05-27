@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Sales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #f9c5d1 0%, #fde8b0 25%, #b8f0d8 50%, #b3deff 75%, #d5b8f5 100%);
+      background-size: 300% 300%;
+      animation: gradShift 10s ease infinite;
+    }
+
+    @keyframes gradShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.45;
+      pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+    }
+    .blob1 { width: 380px; height: 380px; background: #ff8fab; top: -80px; left: -80px; animation-delay: 0s; }
+    .blob2 { width: 300px; height: 300px; background: #ffd166; bottom: -60px; right: -60px; animation-delay: -3s; }
+    .blob3 { width: 260px; height: 260px; background: #06d6a0; top: 40%; left: 60%; animation-delay: -6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+      animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      text-decoration: none;
+      margin-bottom: 22px;
+      background: rgba(255,255,255,0.55);
+      padding: 6px 14px;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-link:hover { background: rgba(255,255,255,0.8); color: #222; }
+
+    /* Card */
+    .card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(255,255,255,0.85);
+      border-radius: 28px;
+      padding: 40px 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    /* Header inside card */
+    .card-header { text-align: center; margin-bottom: 32px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #ff6b9d, #f7b731);
+      border-radius: 100px;
+      padding: 5px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(255,107,157,0.35);
+    }
+    .badge::before {
+      content: '✦';
+      font-size: 9px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #ff6b9d, #f7b731, #06d6a0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #667;
+      line-height: 1.6;
+    }
+    .subtitle a {
+      color: #ff6b9d;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .subtitle a:hover { text-decoration: underline; }
+
+    /* Form grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .full { grid-column: 1 / -1; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.8);
+      border: 2px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      color: #222;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: #bbb; }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: #ff6b9d;
+      box-shadow: 0 0 0 4px rgba(255,107,157,0.12);
+      background: #fff;
+    }
+
+    textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+    /* Checkbox */
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      user-select: none;
+    }
+    .check-row input[type="checkbox"] { display: none; }
+    .check-box {
+      width: 20px; height: 20px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.9);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .check-row input[type="checkbox"]:checked + .check-box {
+      background: linear-gradient(135deg, #ff6b9d, #f7b731);
+      border-color: transparent;
+    }
+    .check-row input[type="checkbox"]:checked + .check-box::after {
+      content: '✓';
+      font-size: 12px;
+      color: white;
+      font-weight: 800;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.07), transparent);
+    }
+
+    /* Submit button */
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #ff6b9d 0%, #f7b731 50%, #06d6a0 100%);
+      background-size: 200% 200%;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.2s, background-position 0.4s;
+      box-shadow: 0 6px 20px rgba(255,107,157,0.35);
+      background-position: left center;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255,107,157,0.4);
+      background-position: right center;
+    }
+    .btn:active { transform: translateY(0); }
+
+    @media (max-width: 480px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .full { grid-column: 1; }
+      .card { padding: 28px 20px; }
+      h1 { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="wrapper">
+    <a href="menu.html" class="back-link">← Back to Menu</a>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="badge">Licence Enquiries</div>
+        <h1>Contact <span>Sales</span></h1>
+        <p class="subtitle">
+          Inquire about licences and pricing.<br>
+          For general questions, visit our <a href="Contact.html">Contact page</a>.
+        </p>
+      </div>
+
+      <form action="#" method="post">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+          </div>
+          <div class="field full">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Enterprise licence inquiry" required>
+          </div>
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your needs…"></textarea>
+          </div>
+          <div class="field full"><div class="divider"></div></div>
+          <div class="field full">
+            <label class="check-row">
+              <input type="checkbox" required>
+              <span class="check-box"></span>
+              I'm human — verified ✔
+            </label>
+          </div>
+          <div class="field full">
+            <button type="submit" class="btn">Send Message </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – MITECMT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:   #1abc9c;
+      --teal2:  #0d9488;
+      --coral:  #ff6b6b;
+      --gold:   #f7c948;
+      --purple: #a78bfa;
+      --blue:   #3b82f6;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 16px;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #e0fdf4 0%, #fef9c3 30%, #fce7f3 60%, #ede9fe 100%);
+      background-size: 300% 300%;
+      animation: bgShift 12s ease infinite;
+    }
+    @keyframes bgShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* floating blobs */
+    .blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(70px); opacity: .3;
+      pointer-events: none; z-index: 0;
+      animation: blobFloat 10s ease-in-out infinite;
+    }
+    .b1 { width:320px;height:320px; background:#1abc9c; top:-100px; left:-80px; animation-delay:0s; }
+    .b2 { width:260px;height:260px; background:#f7c948; bottom:-80px; right:-60px; animation-delay:-4s; }
+    .b3 { width:200px;height:200px; background:#a78bfa; top:40%; left:65%; animation-delay:-7s; }
+    @keyframes blobFloat {
+      0%,100%{ transform:translateY(0) scale(1); }
+      50%    { transform:translateY(-28px) scale(1.06); }
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 620px;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255,255,255,0.9);
+      border-radius: 28px;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.13);
+      overflow: hidden;
+      animation: popIn .65s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      from{ opacity:0; transform:scale(.9) translateY(28px); }
+      to  { opacity:1; transform:scale(1)  translateY(0); }
+    }
+
+    /* rainbow top bar */
+    .card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:5px;
+      background: linear-gradient(90deg, var(--teal), var(--blue), var(--purple), var(--coral), var(--gold));
+    }
+
+    /* ── Header section ── */
+    .card-header {
+      background: linear-gradient(135deg, var(--teal2) 0%, var(--teal) 60%, #34d399 100%);
+      padding: 2rem 2.2rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-header::before {
+      content:''; position:absolute;
+      width:200px; height:200px; border-radius:50%;
+      background:rgba(255,255,255,.08);
+      top:-60px; right:-50px;
+    }
+    .card-header::after {
+      content:''; position:absolute;
+      width:120px; height:120px; border-radius:50%;
+      background:rgba(255,255,255,.06);
+      bottom:-40px; left:-30px;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap:6px;
+      font-size:.75rem; font-weight:600;
+      color:rgba(255,255,255,.8);
+      text-decoration:none;
+      background:rgba(255,255,255,.15);
+      padding:5px 12px; border-radius:100px;
+      margin-bottom:14px;
+      transition: background .2s;
+      position: relative; z-index:1;
+    }
+    .back-link:hover { background:rgba(255,255,255,.25); color:#fff; }
+
+    .card-header h1 {
+      font-family:'Playfair Display',serif;
+      font-size:2rem; color:#fff;
+      line-height:1.15; margin-bottom:6px;
+      position:relative; z-index:1;
+    }
+    .card-header h1 span { color: var(--gold); }
+
+    .card-header .notice {
+      font-size:.8rem; color:rgba(255,255,255,.85);
+      line-height:1.6; position:relative; z-index:1;
+    }
+
+    /* info list */
+    .info-list {
+      list-style: none;
+      display: flex; flex-direction:column; gap:.55rem;
+      margin-top:1rem;
+      position:relative; z-index:1;
+    }
+    .info-list li {
+      display:flex; align-items:flex-start; gap:.6rem;
+      background:rgba(255,255,255,.15);
+      border-radius:12px;
+      padding:.6rem .9rem;
+      font-size:.78rem;
+      color:#fff;
+      line-height:1.5;
+    }
+    .info-list li .dot {
+      width:20px; height:20px; flex-shrink:0;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.7rem;
+      margin-top:1px;
+    }
+    .dot-coral   { background:var(--coral); }
+    .dot-gold    { background:var(--gold);  }
+    .dot-purple  { background:var(--purple);}
+
+    .info-list a {
+      color:var(--gold);
+      font-weight:600;
+      text-decoration:none;
+    }
+    .info-list a:hover { text-decoration:underline; }
+
+    /* ── Form section ── */
+    .card-body { padding: 2rem 2.2rem 2.2rem; }
+
+    .section-label {
+      font-size:.7rem; font-weight:800;
+      letter-spacing:.12em; text-transform:uppercase;
+      color: var(--teal2); margin-bottom:1.2rem;
+      display:flex; align-items:center; gap:8px;
+    }
+    .section-label::after {
+      content:''; flex:1; height:2px;
+      background:linear-gradient(90deg,rgba(26,188,156,.3),transparent);
+      border-radius:2px;
+    }
+
+    .form-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .full { grid-column: 1 / -1; }
+
+    .field { display:flex; flex-direction:column; gap:5px; }
+    .field label {
+      font-size:.7rem; font-weight:700;
+      letter-spacing:.07em; text-transform:uppercase;
+      color:#555;
+    }
+    .field input,
+    .field textarea {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 11px 15px;
+      font-family:'Poppins',sans-serif;
+      font-size:.87rem; color:#222;
+      outline:none; background:#fafafa;
+      transition: border-color .25s, box-shadow .25s, background .2s;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color:#bbb; }
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(26,188,156,.12);
+      background:#fff;
+    }
+    .field textarea { resize:vertical; min-height:110px; line-height:1.6; }
+
+    /* checkbox */
+    .check-row {
+      display:flex; align-items:center; gap:10px;
+      font-size:.82rem; font-weight:600; color:#555;
+      cursor:pointer; user-select:none;
+    }
+    .check-row input[type="checkbox"] { display:none; }
+    .check-box {
+      width:20px; height:20px; border:2px solid #ddd;
+      border-radius:6px; background:#fafafa;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:all .2s;
+    }
+    .check-row input:checked + .check-box {
+      background:linear-gradient(135deg,var(--teal),var(--blue));
+      border-color:transparent;
+    }
+    .check-row input:checked + .check-box::after {
+      content:'✓'; font-size:12px; color:#fff; font-weight:800;
+    }
+
+    /* divider */
+    .divider { height:1px; background:linear-gradient(90deg,transparent,#e5e7eb,transparent); margin:.4rem 0; }
+
+    /* submit */
+    .btn {
+      width:100%; padding:14px;
+      background:linear-gradient(135deg,var(--teal) 0%,var(--blue) 100%);
+      background-size:200%; background-position:left;
+      border:none; border-radius:14px;
+      font-family:'Poppins',sans-serif;
+      font-size:.95rem; font-weight:700; color:#fff;
+      cursor:pointer; letter-spacing:.03em;
+      box-shadow:0 6px 20px rgba(26,188,156,.35);
+      transition:transform .15s, box-shadow .2s, background-position .4s;
+    }
+    .btn:hover {
+      transform:translateY(-2px);
+      box-shadow:0 10px 28px rgba(26,188,156,.42);
+      background-position:right;
+    }
+    .btn:active { transform:translateY(0); }
+
+    @media(max-width:480px){
+      .form-grid { grid-template-columns:1fr; }
+      .full { grid-column:1; }
+      .card-header, .card-body { padding-left:1.3rem; padding-right:1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <div class="card">
+
+    <!-- ── Header ── -->
+    <div class="card-header">
+      <a href="menu.html" class="back-link">← Menu</a>
+      <h1>Contact <span>Us</span> ✦</h1>
+      <p class="notice">Please note — this page should <strong>not</strong> be used as a helpdesk for MITECMT users:</p>
+
+      <ul class="info-list">
+        <li>
+          <span class="dot dot-coral">💳</span>
+          Questions about licences? <a href="Contact sales.html">&nbsp;Contact Sales →</a>
+        </li>
+        <li>
+          <span class="dot dot-gold">❓</span>
+          General questions? Check our <a href="questions.html">&nbsp;FAQ page →</a>
+        </li>
+        <li>
+          <span class="dot dot-purple">🖥️</span>
+          Authors &amp; reviewers — log in to the conference and use the <strong>"Help"</strong> menu tab.
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── Form ── -->
+    <div class="card-body">
+      <div class="section-label">Send a Message</div>
+
+      <form action="#" method="post">
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@mite.ac.in" required>
+          </div>
+
+          <div class="field full">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="What is your message about?" required>
+          </div>
+
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Write your message here…"></textarea>
+          </div>
+
+          <div class="full"><div class="divider"></div></div>
+
+          <div class="field full">
+            <label class="check-row">
+              <input type="checkbox" required>
+              <span class="check-box"></span>
+              I'm human — verified ✔
+            </label>
+          </div>
+
+          <div class="field full">
+            <button type="submit" class="btn">Send Message </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>

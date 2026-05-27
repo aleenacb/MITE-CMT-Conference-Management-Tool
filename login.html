@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Login.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+
+<div class="scene">
+
+  <!-- LEFT PANEL — illustrated cosmic background -->
+  <div class="left">
+    <svg class="bg" viewBox="0 0 400 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sky" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#0f0c29"/>
+          <stop offset="50%" stop-color="#302b63"/>
+          <stop offset="100%" stop-color="#24243e"/>
+        </radialGradient>
+        <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.45"/>
+          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glow3" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#ff6b6b" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fde68a" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      
+      <!-- Sky background -->
+      <rect width="400" height="620" fill="url(#sky)"/>
+      <!-- Ambient glows -->
+      <ellipse cx="200" cy="160" rx="180" ry="160" fill="url(#glow1)"/>
+      <ellipse cx="60" cy="400" rx="130" ry="120" fill="url(#glow2)"/>
+      <ellipse cx="340" cy="480" rx="120" ry="100" fill="url(#glow3)"/>
+      <!-- Moon -->
+      <circle cx="310" cy="80" r="50" fill="url(#moonGlow)"/>
+      <circle cx="310" cy="80" r="32" fill="#fef3c7" opacity="0.9"/>
+      <circle cx="322" cy="70" r="22" fill="#302b63" opacity="0.85"/>
+      <!-- Stars -->
+      <circle cx="40" cy="40" r="1.5" fill="#fff" opacity="0.9"/>
+      <circle cx="80" cy="20" r="1" fill="#fff" opacity="0.7"/>
+      <circle cx="130" cy="55" r="1.5" fill="#c4b5fd" opacity="0.9"/>
+      <circle cx="170" cy="30" r="1" fill="#fff" opacity="0.6"/>
+      <circle cx="220" cy="15" r="1.5" fill="#fff" opacity="0.8"/>
+      <circle cx="260" cy="45" r="1" fill="#fde68a" opacity="0.9"/>
+      <circle cx="350" cy="25" r="1.5" fill="#fff" opacity="0.7"/>
+      <circle cx="380" cy="60" r="1" fill="#c4b5fd" opacity="0.6"/>
+      <circle cx="20" cy="100" r="1" fill="#fde68a" opacity="0.8"/>
+      <circle cx="60" cy="130" r="1.5" fill="#fff" opacity="0.5"/>
+      <circle cx="100" cy="90" r="1" fill="#fff" opacity="0.7"/>
+      <circle cx="155" cy="120" r="1.5" fill="#c4b5fd" opacity="0.8"/>
+      <circle cx="195" cy="95" r="1" fill="#fff" opacity="0.6"/>
+      <circle cx="240" cy="110" r="1.5" fill="#fde68a" opacity="0.7"/>
+      <circle cx="375" cy="140" r="1" fill="#fff" opacity="0.6"/>
+      <!-- Ground layers -->
+      <ellipse cx="200" cy="520" rx="190" ry="60" fill="#1a1040" opacity="0.7"/>
+      <path d="M0 480 Q50 440 100 470 Q150 500 200 460 Q250 420 300 455 Q350 490 400 460 L400 620 L0 620Z" fill="#0d0b1e" opacity="0.9"/>
+      <path d="M0 500 Q60 475 120 490 Q180 505 240 480 Q300 455 360 475 Q380 482 400 475 L400 620 L0 620Z" fill="#110e2a"/>
+      <!-- Crystal towers -->
+      <ellipse cx="90" cy="495" rx="28" ry="42" fill="#1f1545"/>
+      <ellipse cx="90" cy="495" rx="20" ry="34" fill="#2d1d6b"/>
+      <ellipse cx="90" cy="468" rx="8" ry="6" fill="#a855f7" opacity="0.6"/>
+      <ellipse cx="200" cy="488" rx="22" ry="36" fill="#1f1545"/>
+      <ellipse cx="200" cy="488" rx="15" ry="28" fill="#2d1d6b"/>
+      <ellipse cx="200" cy="464" rx="6" ry="5" fill="#3b82f6" opacity="0.6"/>
+      <ellipse cx="310" cy="492" rx="25" ry="40" fill="#1f1545"/>
+      <ellipse cx="310" cy="492" rx="17" ry="32" fill="#2d1d6b"/>
+      <ellipse cx="310" cy="464" rx="7" ry="5" fill="#ff6b6b" opacity="0.6"/>
+      <!-- Ground decorative lines -->
+      <path d="M30 560 Q60 540 90 555 Q120 570 150 550 Q160 544 170 548" stroke="#c4b5fd" stroke-width="1" fill="none" opacity="0.4"/>
+      <path d="M230 565 Q260 545 290 558 Q320 571 350 552 Q365 544 380 548" stroke="#7dd3fc" stroke-width="1" fill="none" opacity="0.4"/>
+      <!-- Ground dots -->
+      <circle cx="70" cy="560" r="2.5" fill="#ff6b6b" opacity="0.8"/>
+      <circle cx="160" cy="545" r="2" fill="#fde68a" opacity="0.9"/>
+      <circle cx="250" cy="562" r="2.5" fill="#a855f7" opacity="0.8"/>
+      <circle cx="330" cy="548" r="2" fill="#34d399" opacity="0.9"/>
+    </svg>
+    <div class="left-content">
+      <div class="left-title">Your universe<br>starts here</div>
+      <div class="left-sub">Sign in and explore a world<br>built just for you.</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num"></div><div class="stat-lbl">Users</div></div>
+        <div class="stat"><div class="stat-num"></div><div class="stat-lbl">Uptime</div></div>
+        <div class="stat"><div class="stat-num"></div><div class="stat-lbl">Rating</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — login form -->
+  <div class="right">
+    <div class="logo-row">
+      <div class="logo-box"><i class="ti ti-bolt"></i></div>
+      <span class="logo-name">Luminary</span>
+    </div>
+    <p class="r-title">Welcome back</p>
+    <p class="r-sub">Sign in to continue your journey</p>
+
+    <form id="loginForm" novalidate>
+      <div class="inp-wrap">
+        <i class="ti ti-mail ic"></i>
+        <input class="inp" type="email" placeholder="you@example.com" id="loginEmail" autocomplete="email" required>
+      </div>
+
+      <div class="inp-wrap">
+        <i class="ti ti-lock ic"></i>
+        <input class="inp" type="password" placeholder="Password" id="loginPassword" autocomplete="current-password" required>
+        <button class="eye-btn" id="eyeBtn" type="button" aria-label="Toggle password visibility">
+          <i class="ti ti-eye" id="eyeIco"></i>
+        </button>
+        <div class="sbar" id="strengthBar"><div class="sbar-fill" id="strengthFill"></div></div>
+      </div>
+
+      <div class="opts-row">
+        <label class="remember"><input type="checkbox"> Remember me</label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+
+      <button class="btn-main" type="submit">
+        <i class="ti ti-login"></i> Sign in
+      </button>
+    </form>
+
+    <div class="divider">
+      <div class="dline"></div><span class="dtxt">or continue with</span><div class="dline"></div>
+    </div>
+
+    <div class="soc-row">
+      <button class="soc-btn" type="button" onclick="window.location.href='#google'">
+        <i class="ti ti-brand-google" style="color:#EA4335;font-size:18px"></i> Google
+      </button>
+      <button class="soc-btn" type="button" onclick="window.location.href='#github'">
+        <i class="ti ti-brand-github" style="font-size:18px"></i> GitHub
+      </button>
+    </div>
+
+    <p class="foot">No account yet? <a href="Signup.html">Sign up free</a></p>
+  </div>
+</div>
+
+<script>
+  const pw = document.getElementById('loginPassword');
+  const eyeBtn = document.getElementById('eyeBtn');
+  const eyeIco = document.getElementById('eyeIco');
+  const strengthBar = document.getElementById('strengthBar');
+  const strengthFill = document.getElementById('strengthFill');
+
+  eyeBtn.addEventListener('click', () => {
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    eyeIco.className = show ? 'ti ti-eye-off' : 'ti ti-eye';
+  });
+
+  pw.addEventListener('input', () => {
+    const v = pw.value;
+    strengthBar.style.display = v ? 'block' : 'none';
+    let score = 0;
+    if (v.length >= 8) score++;
+    if (/[A-Z]/.test(v)) score++;
+    if (/\d/.test(v)) score++;
+    if (/[^A-Za-z0-9]/.test(v)) score++;
+    strengthFill.style.width = [0, 25, 50, 80, 100][score] + '%';
+    strengthFill.style.background = ['', '#ff6b6b', '#fbbf24', '#a855f7', '#34d399'][score];
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = pw.value;
+    document.getElementById('loginEmail').style.borderColor = !email ? '#ff6b6b' : '';
+    pw.style.borderColor = !password ? '#ff6b6b' : '';
+    if (email && password) {
+      window.location.href = 'Homepage.html';
+    }
+  });
+</script>
+</body>
+</html>

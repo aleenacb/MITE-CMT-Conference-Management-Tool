@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Conference – MITECMT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:   #1abc9c;
+      --teal2:  #0d9488;
+      --coral:  #ff6b6b;
+      --gold:   #f7c948;
+      --purple: #a78bfa;
+      --blue:   #3b82f6;
+      --orange: #fb923c;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 16px;
+      overflow-x: hidden;
+      background: linear-gradient(135deg,#fef3c7 0%,#d1fae5 35%,#ede9fe 70%,#fce7f3 100%);
+      background-size: 300% 300%;
+      animation: bgMove 14s ease infinite;
+    }
+    @keyframes bgMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* floating blobs */
+    .blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(75px); opacity: .28;
+      pointer-events: none; z-index: 0;
+      animation: blobDrift 11s ease-in-out infinite;
+    }
+    .b1 { width:340px;height:340px; background:var(--teal);   top:-110px; left:-90px;  animation-delay:0s;  }
+    .b2 { width:280px;height:280px; background:var(--orange); bottom:-90px; right:-70px; animation-delay:-4s; }
+    .b3 { width:220px;height:220px; background:var(--purple); top:45%; left:68%;  animation-delay:-8s; }
+    @keyframes blobDrift {
+      0%,100%{ transform:translateY(0) scale(1); }
+      50%    { transform:translateY(-26px) scale(1.06); }
+    }
+
+    /* ── Outer card (two-column) ── */
+    .card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 920px;
+      background: rgba(255,255,255,.76);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1.5px solid rgba(255,255,255,.92);
+      border-radius: 30px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.14);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      animation: popIn .65s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      from{ opacity:0; transform:scale(.9) translateY(24px); }
+      to  { opacity:1; transform:scale(1)  translateY(0);    }
+    }
+
+    /* ══════════════════════
+       LEFT — Image + Info
+    ══════════════════════ */
+    .left-panel {
+      background: linear-gradient(160deg, var(--teal2) 0%, var(--teal) 55%, #34d399 100%);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative circles */
+    .left-panel::before {
+      content:''; position:absolute;
+      width:220px; height:220px; border-radius:50%;
+      background:rgba(255,255,255,.07);
+      top:-60px; right:-60px; z-index:0;
+    }
+    .left-panel::after {
+      content:''; position:absolute;
+      width:150px; height:150px; border-radius:50%;
+      background:rgba(255,255,255,.05);
+      bottom:-50px; left:-40px; z-index:0;
+    }
+
+    /* conference image */
+    .conf-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .conf-img-wrap img {
+      width:100%; height:100%;
+      object-fit:cover;
+      transition: transform .6s ease;
+    }
+    .conf-img-wrap:hover img { transform: scale(1.06); }
+    .conf-img-wrap .img-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to bottom, rgba(13,148,136,.25) 0%, rgba(13,148,136,.6) 100%);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:6px;
+    }
+    .img-overlay .event-badge {
+      background:var(--gold);
+      color:#1a1a2e;
+      font-size:.65rem; font-weight:800;
+      letter-spacing:.12em; text-transform:uppercase;
+      padding:4px 12px; border-radius:100px;
+    }
+    .img-overlay h2 {
+      font-family:'Playfair Display',serif;
+      font-size:1.4rem; color:#fff;
+      text-align:center; padding:0 16px;
+      text-shadow:0 2px 10px rgba(0,0,0,.3);
+    }
+
+    /* info text below image */
+    .left-info {
+      padding: 1.6rem 1.8rem;
+      display: flex; flex-direction:column; gap:1rem;
+      position:relative; z-index:1;
+      flex:1;
+    }
+
+    .left-info p {
+      font-size:.82rem;
+      color:rgba(255,255,255,.9);
+      line-height:1.7;
+    }
+
+    .link-pills {
+      display:flex; flex-direction:column; gap:.55rem;
+    }
+    .link-pill {
+      display:flex; align-items:center; gap:.65rem;
+      background:rgba(255,255,255,.16);
+      border-radius:12px; padding:.6rem .9rem;
+      font-size:.78rem; color:#fff; font-weight:500;
+      text-decoration:none;
+      transition:background .2s;
+    }
+    .link-pill:hover { background:rgba(255,255,255,.28); }
+    .pill-icon {
+      width:26px; height:26px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.85rem; flex-shrink:0;
+    }
+    .pi-gold   { background:var(--gold); }
+    .pi-coral  { background:var(--coral); }
+    .pi-blue   { background:var(--blue); }
+
+    /* ══════════════════════
+       RIGHT — Form
+    ══════════════════════ */
+    .right-panel {
+      padding: 2.4rem 2.2rem;
+      display:flex; flex-direction:column; gap:1rem;
+      position:relative; overflow:hidden;
+    }
+
+    /* rainbow top bar */
+    .right-panel::before {
+      content:''; position:absolute;
+      top:0; left:0; right:0; height:5px;
+      background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple),var(--coral),var(--gold));
+    }
+
+    .panel-title {
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem; color:#1a1a2e;
+    }
+    .panel-title span { color:var(--teal2); }
+
+    .panel-sub {
+      font-size:.78rem; color:#888; margin-top:2px;
+    }
+
+    .section-label {
+      font-size:.68rem; font-weight:800;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--teal2);
+      display:flex; align-items:center; gap:8px;
+      margin-bottom:.2rem;
+    }
+    .section-label::after {
+      content:''; flex:1; height:2px;
+      background:linear-gradient(90deg,rgba(13,148,136,.3),transparent);
+      border-radius:2px;
+    }
+
+    /* form grid */
+    .form-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:13px;
+    }
+    .full { grid-column:1/-1; }
+
+    .field { display:flex; flex-direction:column; gap:5px; }
+    .field label {
+      font-size:.69rem; font-weight:700;
+      letter-spacing:.07em; text-transform:uppercase; color:#555;
+    }
+    .field input,
+    .field textarea {
+      border:2px solid #e5e7eb; border-radius:12px;
+      padding:11px 15px;
+      font-family:'Poppins',sans-serif;
+      font-size:.86rem; color:#222;
+      outline:none; background:#fafafa;
+      transition:border-color .25s, box-shadow .25s, background .2s;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color:#bbb; }
+    .field input:focus,
+    .field textarea:focus {
+      border-color:var(--teal);
+      box-shadow:0 0 0 4px rgba(26,188,156,.12);
+      background:#fff;
+    }
+    .field textarea { resize:vertical; min-height:95px; line-height:1.6; }
+
+    /* checkbox */
+    .check-row {
+      display:flex; align-items:center; gap:10px;
+      font-size:.8rem; font-weight:600; color:#555;
+      cursor:pointer; user-select:none;
+    }
+    .check-row input[type="checkbox"] { display:none; }
+    .check-box {
+      width:20px; height:20px; border:2px solid #ddd;
+      border-radius:6px; background:#fafafa;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:all .2s;
+    }
+    .check-row input:checked + .check-box {
+      background:linear-gradient(135deg,var(--teal),var(--blue));
+      border-color:transparent;
+    }
+    .check-row input:checked + .check-box::after {
+      content:'✓'; font-size:12px; color:#fff; font-weight:800;
+    }
+
+    /* divider */
+    .divider { height:1px; background:linear-gradient(90deg,transparent,#e5e7eb,transparent); }
+
+    /* submit btn */
+    .btn {
+      width:100%; padding:14px;
+      background:linear-gradient(135deg,var(--teal) 0%,var(--blue) 100%);
+      background-size:200%; background-position:left;
+      border:none; border-radius:14px;
+      font-family:'Poppins',sans-serif;
+      font-size:.95rem; font-weight:700; color:#fff;
+      cursor:pointer; letter-spacing:.03em;
+      box-shadow:0 6px 20px rgba(26,188,156,.35);
+      transition:transform .15s, box-shadow .2s, background-position .4s;
+    }
+    .btn:hover {
+      transform:translateY(-2px);
+      box-shadow:0 10px 28px rgba(26,188,156,.42);
+      background-position:right;
+    }
+    .btn:active { transform:translateY(0); }
+
+    @media(max-width:700px){
+      .card { grid-template-columns:1fr; }
+      .form-grid { grid-template-columns:1fr; }
+      .full { grid-column:1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <div class="card">
+
+    <!-- ── LEFT PANEL ── -->
+    <div class="left-panel">
+
+      <!-- Conference image -->
+      <div class="conf-img-wrap">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=85" alt="Conference">
+        <div class="img-overlay">
+          <span class="event-badge">✦ MITECMT</span>
+          <h2>Request a Conference Demo</h2>
+        </div>
+      </div>
+
+      <div class="left-info">
+        <p>Use this page if you haven't used MITECMT before and would like us to arrange a <strong>conference demo</strong> for you.</p>
+
+        <div class="link-pills">
+          <a href="Contact sales.html" class="link-pill">
+            <span class="pill-icon pi-gold">💳</span>
+            For licences — Contact Sales
+          </a>
+          <a href="Contact.html" class="link-pill">
+            <span class="pill-icon pi-coral">💬</span>
+            General questions — Contact page
+          </a>
+          <a href="menu.html" class="link-pill">
+            <span class="pill-icon pi-blue">🏠</span>
+            Back to Menu
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT PANEL — FORM ── -->
+    <div class="right-panel">
+      <div>
+        <div class="panel-title">Let's <span>Get Started</span> 🎓</div>
+        <p class="panel-sub">Fill in the form below and we'll get back to you shortly.</p>
+      </div>
+
+      <div class="section-label">Your Details</div>
+
+      <form action="#" method="post">
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@university.ac.in" required>
+          </div>
+
+          <div class="field full">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="e.g. Conference demo request" required>
+          </div>
+
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your conference — expected date, audience size, any special requirements…"></textarea>
+          </div>
+
+          <div class="full"><div class="divider"></div></div>
+
+          <div class="field full">
+            <label class="check-row">
+              <input type="checkbox" required>
+              <span class="check-box"></span>
+              I'm human — verified ✔
+            </label>
+          </div>
+
+          <div class="field full">
+            <button type="submit" class="btn">Send Request </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
